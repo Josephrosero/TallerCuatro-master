@@ -1,12 +1,14 @@
 package com.example.i043114.tallercuatro.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.i043114.tallercuatro.MainActivity;
 import com.example.i043114.tallercuatro.Models.ModelComment;
 import com.example.i043114.tallercuatro.R;
 
@@ -17,8 +19,8 @@ import java.util.List;
  * Created by ASUS on 12/10/2017.
  */
 
-     public class AdapterComment {
-/** List<ModelComment> UserList = new ArrayList<>();
+     public class AdapterComment extends RecyclerView.Adapter<AdapterComment.ViewHolder>{
+ List<ModelComment> UserList = new ArrayList<>();
     Context context;
 
 
@@ -46,7 +48,7 @@ import java.util.List;
 
         // Encargado de trabajar con el item.xml y sus componentes
 
-        holder.textVPostid.setText(Integer.toString(UserList.get(position).getPostid()));
+      //  holder.textVPostid.setText(Integer.toString(UserList.get(position).getPostid()));
         holder.textVId.setText(Integer.toString(UserList.get(position).getId()));
         holder.textVEmail.setText(UserList.get(position).getEmail());
         holder.textVBody.setText(UserList.get(position).getBody());
@@ -59,8 +61,8 @@ import java.util.List;
         return UserList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textVPostid;
+    public class ViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener{
+
         TextView textVId;
         TextView textVEmail;
         TextView textVBody;
@@ -69,20 +71,20 @@ import java.util.List;
         public ViewHolder(View item) {
             super(item);
 
-            //   item.setOnClickListener(this);
+              item.setOnClickListener(this);
 
-            textVPostid = (TextView) item.findViewById(R.id.id_post_comment);
+           // textVPostid = (TextView) item.findViewById(R.id.id_post_comment);
             textVId = (TextView) item.findViewById(R.id.id_comment);
-            textVEmail =(TextView)item.findViewById(R.id.email_comment);
-            textVBody =(TextView ) item.findViewById(R.id.body_comment);
+            textVEmail =(TextView)item.findViewById(R.id.emai_post_comment);
+            textVBody =(TextView ) item.findViewById(R.id.body_post);
         }
 
-        //   @Override
-        //public void onClick(View view) {
-        //Context contextItem = view.getContext();
-        //  Intent intent = new Intent(context, MainActivity.class);
-        //    contextItem.startActivity(intent);
-        //  }
-    } */
+           @Override
+        public void onClick(View view) {
+        Context contextItem = view.getContext();
+          Intent intent = new Intent(context, MainActivity.class);
+            contextItem.startActivity(intent);
+          }
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.example.i043114.tallercuatro;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -8,6 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -27,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     ProgressBar progressBar;
     RecyclerView recyclerView;
+    Toolbar toolbar;
 
     List<ModelUser> modelUserList;
     AdapterUser adapterUserl;
@@ -36,14 +41,45 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        toolbar = (Toolbar)findViewById(R.id.id_tb_toolbar);
+        showToolbar(getResources().getString(R.string.List_Users));
+
+
         progressBar = (ProgressBar) findViewById(R.id.id_pb_item2);
         recyclerView = (RecyclerView) findViewById(R.id.id_rv_item2);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
+
         loadData();
     }
+
+    public void showToolbar(String title){
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(title);
+
+    }
+    public void ActualizarUsers(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu1, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        ActualizarUsers();
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
+    //Toolbar
 
     public Boolean isOnLine(){
         // Hacer llamado al servicio de conectividad utilizando el ConnectivityManager
@@ -105,12 +141,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     public void processData(){
         //adapterCountry = new AdapterCountry(countryList, getApplicationContext());
         //recyclerView.setAdapter(adapterCountry);
         adapterUserl = new AdapterUser(modelUserList, getApplicationContext());
         recyclerView.setAdapter(adapterUserl);
     }
+
+
 
 }

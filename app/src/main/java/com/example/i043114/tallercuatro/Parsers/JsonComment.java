@@ -26,8 +26,8 @@ public class JsonComment {
 
             ModelComment photos = new ModelComment();
 
-            photos.setPostid(item.getInt("postId"));
-            photos.setId(item.getInt("id"));
+        //    photos.setPostid(item.getInt("postId"));
+            photos.setId(item.getInt("postId"));
             photos.setEmail(item.getString("email"));
             photos.setBody(item.getString("body"));
 

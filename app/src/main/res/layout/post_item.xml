@@ -6,7 +6,8 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimary">
+    android:background="@drawable/border1"
+    android:layout_margin="5dp">
 
     <ImageView
         android:id="@+id/img1_user_item"
@@ -33,24 +34,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="User Id: "/>
-
-            <TextView
-                android:id="@+id/id_user_post"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Id_user_post"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Id: "/>
+                android:text="Id: "
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/id_post"
@@ -67,7 +52,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Title: "/>
+                android:text="Title: "
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/title_post"
@@ -84,7 +70,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Body: "/>
+                android:text="Body: "
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/body_post"

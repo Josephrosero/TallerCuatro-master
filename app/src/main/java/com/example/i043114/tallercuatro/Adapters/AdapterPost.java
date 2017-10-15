@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.i043114.tallercuatro.MainActivity;
 import com.example.i043114.tallercuatro.Models.ModelPost;
 import com.example.i043114.tallercuatro.R;
+import com.example.i043114.tallercuatro.Views.ActivityComent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +64,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.ViewHolder> {
         TextView textVId;
         TextView textVTitle;
         TextView textVBody;
-        TextView textViewuserid;
+
 
 
         public ViewHolder(View item) {
@@ -79,9 +80,10 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.ViewHolder> {
 
         @Override
         public void onClick(View view) {
-           // Context contextItem = view.getContext();
-            //Intent intent = new Intent(context, MainActivity.class);
-            //contextItem.startActivity(intent);
+            Context contextItem = view.getContext();
+            Intent intent = new Intent(context, ActivityComent.class);
+            intent.putExtra("idPost",UserList.get(getLayoutPosition()).getId());
+            contextItem.startActivity(intent);
         }
     }
 }

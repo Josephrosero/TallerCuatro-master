@@ -1,7 +1,6 @@
 package com.example.i043114.tallercuatro.Views;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -16,10 +15,10 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.i043114.tallercuatro.Adapters.AdapterPost;
+import com.example.i043114.tallercuatro.Adapters.AdapterComment;
 import com.example.i043114.tallercuatro.Connection.HttpManager;
-import com.example.i043114.tallercuatro.Models.ModelPost;
-import com.example.i043114.tallercuatro.Parsers.JsonPost;
+import com.example.i043114.tallercuatro.Models.ModelComment;
+import com.example.i043114.tallercuatro.Parsers.JsonComment;
 import com.example.i043114.tallercuatro.R;
 
 import org.json.JSONException;
@@ -28,27 +27,25 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by ASUS on 14/10/2017.
+ * Created by ASUS on 15/10/2017.
  */
 
-public class ActivityPost extends AppCompatActivity {
+public class ActivityComent extends AppCompatActivity {
+
+
     ProgressBar progressBarPhoto;
     RecyclerView recyclerViewPhoto;
-    List<ModelPost> postList;
-    AdapterPost adaptersPost;
+    List<ModelComment> commentListt;
+    AdapterComment adapterComment;
     Toolbar toolbar;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
-
+        setContentView(R.layout.activity_main3);
         toolbar = (Toolbar) findViewById(R.id.id_tb_toolbar);
 
-        showToolbar(getResources().getString(R.string.List_Posts), true);
+        showToolbar(getResources().getString(R.string.List_Coments), true);
 
 
         progressBarPhoto = (ProgressBar) findViewById(R.id.id_PantallaPosts);
@@ -59,12 +56,10 @@ public class ActivityPost extends AppCompatActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewPhoto.setLayoutManager(linearLayoutManager);
 
-        loadData(Integer.toString(getIntent().getExtras().getInt("idUser")));
+        loadData(Integer.toString(getIntent().getExtras().getInt("idPost")));
     }
 
 
-
-    // toolbar
     public void showToolbar(String title, boolean upButton){
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(title);
@@ -72,12 +67,12 @@ public class ActivityPost extends AppCompatActivity {
     }
 
     public void Actualizar_post(){
-        loadData(Integer.toString(getIntent().getExtras().getInt("idUser")));
+        loadData(Integer.toString(getIntent().getExtras().getInt("idPost")));
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu2, menu);
+        getMenuInflater().inflate(R.menu.menu3, menu);
         return true;
     }
 
@@ -103,18 +98,18 @@ public class ActivityPost extends AppCompatActivity {
         }
     }
 
-    public void loadData(String idUser){
+    public void loadData(String idPost){
         if (isOnLine()){
             TaskPhoto taskPhoto = new TaskPhoto();
-            taskPhoto.execute("https://jsonplaceholder.typicode.com/posts?userId="+idUser);
+            taskPhoto.execute("https://jsonplaceholder.typicode.com/comments?postId="+idPost);
         }else {
             Toast.makeText(this, "Sin conexion", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void processData(){
-        adaptersPost = new AdapterPost(postList, getApplicationContext());
-        recyclerViewPhoto.setAdapter(adaptersPost);
+        adapterComment = new AdapterComment(commentListt, getApplicationContext());
+        recyclerViewPhoto.setAdapter(adapterComment);
     }
 
     public class TaskPhoto extends AsyncTask<String, String, String> {
@@ -145,7 +140,7 @@ public class ActivityPost extends AppCompatActivity {
             super.onPostExecute(s);
 
             try {
-                postList = JsonPost.getData(s);
+                commentListt = JsonComment.getData(s);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

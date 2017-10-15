@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<android.support.design.widget.CoordinatorLayout
 
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:weightSum="3"
-    android:orientation="horizontal"
-    android:background="@color/colorAccent"
-    >
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+   >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+        android:background="@drawable/border1"
+       >
 
     <ImageView
         android:id="@+id/img1_user_item"
@@ -36,7 +43,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Id: "/>
+                android:text="Id: "
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/id_item_user"
@@ -53,6 +61,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:text="Nombre: "/>
 
             <TextView
@@ -70,7 +79,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nombre de Usuario: "/>
+                android:text="Nombre de Usuario: "
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/username_user"
@@ -87,7 +97,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ciudad: "/>
+                android:text="Ciudad: "
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/city_user"
@@ -104,7 +115,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Compania: "/>
+                android:text="Compania: "
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/name_company_user"
@@ -124,7 +136,6 @@
         android:src="@mipmap/ic_launcher"
         />
 
+    </LinearLayout>
 
-
-
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
