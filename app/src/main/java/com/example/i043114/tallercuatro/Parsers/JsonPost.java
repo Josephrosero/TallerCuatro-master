@@ -26,7 +26,8 @@ public class JsonPost {
 
              ModelPost photos = new ModelPost();
 
-            //  photos.setUserid(item.getInt("userId"));
+           // photos.setUserid(item.getInt("id"));
+            photos.setUserid(item.getInt("userId"));
             photos.setId(item.getInt("id"));
             photos.setTitle(item.getString("title"));
             photos.setBody(item.getString("body"));

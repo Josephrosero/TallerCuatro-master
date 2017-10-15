@@ -19,13 +19,13 @@ import java.util.List;
  * Created by ASUS on 12/10/2017.
  */
 
-    public class AdapterPost extends RecyclerView.Adapter<AdapterPost.ViewHolder> {
+public class AdapterPost extends RecyclerView.Adapter<AdapterPost.ViewHolder> {
     List<ModelPost> UserList = new ArrayList<>();
     Context context;
 
 
-    public AdapterPost(List<ModelPost> UserList, Context context) {
-        this.UserList = UserList;
+    public AdapterPost(List<ModelPost> ModelPost, Context context) {
+        this.UserList = ModelPost;
         this.context = context;
     }
 
@@ -46,7 +46,7 @@ import java.util.List;
 
         // Encargado de trabajar con el item.xml y sus componentes
 
-       // holder.textVUserid.setText(Integer.toString(UserList.get(position).getUserid()));
+
         holder.textVId.setText(Integer.toString(UserList.get(position).getId()));
         holder.textVTitle.setText(UserList.get(position).getTitle());
         holder.textVBody.setText(UserList.get(position).getBody());
@@ -63,12 +63,13 @@ import java.util.List;
         TextView textVId;
         TextView textVTitle;
         TextView textVBody;
+        TextView textViewuserid;
 
 
         public ViewHolder(View item) {
             super(item);
 
-               item.setOnClickListener(this);
+            item.setOnClickListener(this);
 
             textVId = (TextView) item.findViewById(R.id.id_post);
             textVTitle = (TextView) item.findViewById(R.id.title_post);
@@ -76,11 +77,11 @@ import java.util.List;
 
         }
 
-          @Override
+        @Override
         public void onClick(View view) {
-        Context contextItem = view.getContext();
-          Intent intent = new Intent(context, MainActivity.class);
-            contextItem.startActivity(intent);
-          }
+           // Context contextItem = view.getContext();
+            //Intent intent = new Intent(context, MainActivity.class);
+            //contextItem.startActivity(intent);
+        }
     }
 }

@@ -5,16 +5,26 @@ package com.example.i043114.tallercuatro.Models;
  */
 
 public class ModelPost {
-    private Integer userid, id;
-    private String title, body;
 
 
+    private int userid;
+    private int id;
+    private String title;
+    private String body;
 
-    public Integer getId() {
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

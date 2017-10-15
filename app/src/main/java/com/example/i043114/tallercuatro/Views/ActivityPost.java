@@ -1,4 +1,4 @@
-package com.example.i043114.tallercuatro;
+package com.example.i043114.tallercuatro.Views;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -17,6 +16,7 @@ import com.example.i043114.tallercuatro.Adapters.AdapterPost;
 import com.example.i043114.tallercuatro.Connection.HttpManager;
 import com.example.i043114.tallercuatro.Models.ModelPost;
 import com.example.i043114.tallercuatro.Parsers.JsonPost;
+import com.example.i043114.tallercuatro.R;
 
 import org.json.JSONException;
 
@@ -24,64 +24,64 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by ASUS on 12/10/2017.
+ * Created by ASUS on 14/10/2017.
  */
 
-public class MainActivity2 extends AppCompatActivity {
-
-    ProgressBar progressBar;
-    RecyclerView recyclerView;
-    List<ModelPost> modelpostList;
-    AdapterPost adapterPost;
+public class ActivityPost extends AppCompatActivity {
+    ProgressBar progressBarPhoto;
+    RecyclerView recyclerViewPhoto;
+    List<ModelPost> postList;
+    AdapterPost adaptersPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        progressBarPhoto = (ProgressBar) findViewById(R.id.id_PantallaPosts);
+        recyclerViewPhoto = (RecyclerView) findViewById(R.id.id_PantallaPosts1);
 
-        progressBar = (ProgressBar) findViewById(R.id.id_pb_item3);
-        recyclerView = (RecyclerView) findViewById(R.id.id_rv_item3);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerViewPhoto.setLayoutManager(linearLayoutManager);
 
-
-        loadData(Integer.toString(getIntent().getExtras().getInt("userId")));
+        loadData(Integer.toString(getIntent().getExtras().getInt("idUser")));
     }
 
-    public Boolean isOnLine() {
+    public Boolean isOnLine(){
         // Hacer llamado al servicio de conectividad utilizando el ConnectivityManager
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        // Obtener el estado de la conexion a internet en el dispositivo
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        if (networkInfo != null) {
+
+        // Validar el estado obtenido de la conexion
+        if (networkInfo != null){
             return true;
-        } else {
+        }else {
             return false;
         }
     }
 
-    public void loadData(String userId) {
-        if (isOnLine()) {
-            TaskCountry taskCountry = new TaskCountry();
-            taskCountry.execute("https://jsonplaceholder.typicode.com/posts?userId="+userId);
-        } else {
+    public void loadData(String idUser){
+        if (isOnLine()){
+            TaskPhoto taskPhoto = new TaskPhoto();
+            taskPhoto.execute("https://jsonplaceholder.typicode.com/posts?userId="+idUser);
+        }else {
             Toast.makeText(this, "Sin conexion", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void processData() {
-        //adapterCountry = new AdapterCountry(countryList, getApplicationContext());
-        //recyclerView.setAdapter(adapterCountry);
-        adapterPost = new AdapterPost(modelpostList, getApplicationContext());
-        recyclerView.setAdapter(adapterPost);
+    public void processData(){
+        adaptersPost = new AdapterPost(postList, getApplicationContext());
+        recyclerViewPhoto.setAdapter(adaptersPost);
     }
 
-    public class TaskCountry extends AsyncTask<String, String, String> {
+    public class TaskPhoto extends AsyncTask<String, String, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressBar.setVisibility(View.VISIBLE);
+            progressBarPhoto.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -105,20 +105,14 @@ public class MainActivity2 extends AppCompatActivity {
             super.onPostExecute(s);
 
             try {
-
-                modelpostList = JsonPost.getData(s);
+                postList = JsonPost.getData(s);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
             processData();
 
-            progressBar.setVisibility(View.GONE);
+            progressBarPhoto.setVisibility(View.GONE);
         }
     }
-
-
-
-
-
 }
