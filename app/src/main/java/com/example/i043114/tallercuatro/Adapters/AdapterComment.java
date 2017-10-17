@@ -71,7 +71,7 @@ import java.util.List;
         public ViewHolder(View item) {
             super(item);
 
-              item.setOnClickListener(this);
+            item.setOnClickListener(this);
 
            // textVPostid = (TextView) item.findViewById(R.id.id_post_comment);
             textVId = (TextView) item.findViewById(R.id.id_comment);
@@ -83,6 +83,7 @@ import java.util.List;
         public void onClick(View view) {
         Context contextItem = view.getContext();
           Intent intent = new Intent(context, MainActivity.class);
+               intent.putExtra("iduser2", UserList.get(getLayoutPosition()).getId());
             contextItem.startActivity(intent);
           }
     }

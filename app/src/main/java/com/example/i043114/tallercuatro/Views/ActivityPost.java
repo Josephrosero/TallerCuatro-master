@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.i043114.tallercuatro.Adapters.AdapterPost;
 import com.example.i043114.tallercuatro.Connection.HttpManager;
+import com.example.i043114.tallercuatro.MainActivity;
 import com.example.i043114.tallercuatro.Models.ModelPost;
 import com.example.i043114.tallercuatro.Parsers.JsonPost;
 import com.example.i043114.tallercuatro.R;
@@ -59,8 +60,12 @@ public class ActivityPost extends AppCompatActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewPhoto.setLayoutManager(linearLayoutManager);
 
+
+        Bundle a = getIntent().getExtras();
         loadData(Integer.toString(getIntent().getExtras().getInt("idUser")));
     }
+
+
 
 
 
@@ -71,9 +76,6 @@ public class ActivityPost extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(upButton);
     }
 
-    public void Actualizar_post(){
-        loadData(Integer.toString(getIntent().getExtras().getInt("idUser")));
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -83,8 +85,30 @@ public class ActivityPost extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Actualizar_post();
+        //Actualizar_post();
+        switch (item.getItemId()) {
+
+            case R.id.home:
+                finish();
+                break;
+
+            case (R.id.id_menu_p2):
+
+                loadData(Integer.toString(getIntent().getExtras().getInt("idUser")));
+
+                break;
+
+            default:
+
+                return super.onOptionsItemSelected(item);
+
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void Showpantallatres(){
+        Intent a = new Intent(getApplicationContext(), ActivityPost.class);
+        startActivity(a);
     }
 
 

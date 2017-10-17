@@ -1,6 +1,7 @@
 package com.example.i043114.tallercuatro.Views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -45,6 +46,7 @@ public class ActivityComent extends AppCompatActivity {
         setContentView(R.layout.activity_main3);
         toolbar = (Toolbar) findViewById(R.id.id_tb_toolbar);
 
+
         showToolbar(getResources().getString(R.string.List_Coments), true);
 
 
@@ -56,19 +58,26 @@ public class ActivityComent extends AppCompatActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewPhoto.setLayoutManager(linearLayoutManager);
 
-        loadData(Integer.toString(getIntent().getExtras().getInt("idPost")));
+        Bundle a = getIntent().getExtras();
+        loadData(Integer.toString(getIntent().getExtras().getInt("iduser2")));
     }
 
 
-    public void showToolbar(String title, boolean upButton){
+    public void Showpantallatres() {
+        Intent a = new Intent(getApplicationContext(), ActivityPost.class);
+        startActivity(a);
+    }
+
+
+    public void showToolbar(String title, boolean upButton) {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(upButton);
     }
 
-    public void Actualizar_post(){
-        loadData(Integer.toString(getIntent().getExtras().getInt("idPost")));
-    }
+    //  public void Actualizar_post(){
+    //    loadData(Integer.toString(getIntent().getExtras().getInt("idPost")));
+    // }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -78,12 +87,31 @@ public class ActivityComent extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Actualizar_post();
+
+        switch (item.getItemId()) {
+
+            case R.id.home:
+                finish();
+                break;
+
+            case (R.id.id_menu_p3):
+
+                loadData(Integer.toString(getIntent().getExtras().getInt("iduser2")));
+
+                break;
+
+            default:
+
+                return super.onOptionsItemSelected(item);
+
+        }
+
+        //Showpantallatres();
         return super.onOptionsItemSelected(item);
     }
 
 
-    public Boolean isOnLine(){
+    public Boolean isOnLine() {
         // Hacer llamado al servicio de conectividad utilizando el ConnectivityManager
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -91,23 +119,23 @@ public class ActivityComent extends AppCompatActivity {
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
         // Validar el estado obtenido de la conexion
-        if (networkInfo != null){
+        if (networkInfo != null) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
 
-    public void loadData(String idPost){
-        if (isOnLine()){
+    public void loadData(String idPost) {
+        if (isOnLine()) {
             TaskPhoto taskPhoto = new TaskPhoto();
-            taskPhoto.execute("https://jsonplaceholder.typicode.com/comments?postId="+idPost);
-        }else {
+            taskPhoto.execute("https://jsonplaceholder.typicode.com/comments?postId=" + idPost);
+        } else {
             Toast.makeText(this, "Sin conexion", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void processData(){
+    public void processData() {
         adapterComment = new AdapterComment(commentListt, getApplicationContext());
         recyclerViewPhoto.setAdapter(adapterComment);
     }
